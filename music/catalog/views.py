@@ -7,6 +7,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 import datetime
 from .models import Artist
+from .forms import BasicForm, ArtistForm
 
 class Index(View):
 	def get(self, request, *args, **kwargs):
@@ -58,9 +59,59 @@ class DeleteArtist(DeleteView):
 class ExampleForm(View):
     def get(self, request):
         name = request.GET.get('your_name')
-        print('GET: ' + name)
+        print('GET')
+        print(name)
         return render(request, 'catalog/example_form.html')
     def post(self, request):
         name = request.POST.get('your_name')
-        print('POST: ' + name)
+        print('POST')
+        print(name)
         return render(request, 'catalog/example_form.html')
+
+class FormsBasics(View):
+	def get(self, request):
+		form = BasicForm()
+		post_form = BasicForm()
+		context = {
+			'form': form,
+			'post_form': post_form
+		}
+
+		return render(request, 'catalog/forms_basics.html', context)
+	def post(self, request):
+		post_form = BasicForm(request.POST)
+		form = BasicForm()
+
+		if post_form.is_valid():
+			name = post_form.cleaned_data['your_name']
+			email = post_form.cleaned_data['email']
+			print(name)
+			print(email)
+
+		context = {
+			'post_form': post_form,
+			'form': form
+		}
+		return render(request, 'catalog/forms_basics.html', context)
+
+class ArtistManualCreate(View):
+	def get(self, request):
+		form = ArtistForm()
+
+		context = {
+			'form': form
+		}
+
+		return render(request, 'catalog/artist_create_manually.html', context)
+	
+	def post(self, request):
+		form = ArtistForm(request.POST)
+
+		context = {
+			'form': form
+		}
+
+		if form.is_valid():
+			form.save()
+
+		return render(request, 'catalog/artist_create_manually.html', context)

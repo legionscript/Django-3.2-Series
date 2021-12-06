@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from catalog.views import Index, SampleForm, ListArtists, DetailArtist, CreateArtist, UpdateArtist, DeleteArtist, ExampleForm
+from catalog.views import Index, SampleForm, ListArtists, DetailArtist, CreateArtist, UpdateArtist, DeleteArtist, ExampleForm, FormsBasics, ArtistManualCreate
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +27,7 @@ urlpatterns = [
     path('artists/<int:pk>/delete', DeleteArtist.as_view()),
     path('sample-form/', SampleForm.as_view()),
     path('example-form', ExampleForm.as_view()),
+    path('forms-basics', FormsBasics.as_view()),
+    path('artist-create', ArtistManualCreate.as_view()),
 
 ]

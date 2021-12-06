@@ -54,3 +54,13 @@ class UpdateArtist(UpdateView):
 class DeleteArtist(DeleteView):
 	model = Artist
 	success_url = reverse_lazy('index')
+
+class ExampleForm(View):
+    def get(self, request):
+        name = request.GET.get('your_name')
+        print('GET: ' + name)
+        return render(request, 'catalog/example_form.html')
+    def post(self, request):
+        name = request.POST.get('your_name')
+        print('POST: ' + name)
+        return render(request, 'catalog/example_form.html')

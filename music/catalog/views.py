@@ -105,7 +105,7 @@ class ArtistManualCreate(View):
 		return render(request, 'catalog/artist_create_manually.html', context)
 	
 	def post(self, request):
-		form = ArtistForm(request.POST)
+		form = ArtistForm(request.POST, request.FILES)
 
 		context = {
 			'form': form

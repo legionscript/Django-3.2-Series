@@ -9,8 +9,8 @@ class Artist(models.Model):
 	favorite = models.BooleanField(default=False)
 	last_modified = models.DateTimeField(auto_now=True)
 	created = models.DateTimeField(auto_now_add=True)
-	profile_picture = models.ImageField(upload_to='uploads', blank=True, null=True)
-	download = models.FileField(upload_to='uploads', blank=True, null=True)
+	profile_picture = models.ImageField(blank=True, null=True)
+	download = models.FileField(upload_to='artists_downloads', blank=True, null=True)
 
 class Album(models.Model):
 	title = models.CharField(max_length=100)

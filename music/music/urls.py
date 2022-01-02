@@ -1,5 +1,5 @@
-"""music URL Configuration
 
+"""music URL Configuration
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
 Examples:
@@ -33,4 +33,4 @@ urlpatterns = [
     path('forms-basics', FormsBasics.as_view()),
     path('artist-create', ArtistManualCreate.as_view()),
 
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
